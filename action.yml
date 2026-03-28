@@ -1,0 +1,16 @@
+﻿name: 'ReleaseGuard'
+description: 'Blocks insecure releases using SARIF input'
+
+inputs:
+  sarif:
+    description: 'Path to SARIF file'
+    required: true
+    default: 'results.sarif'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run ReleaseGuard
+      shell: pwsh
+      run: |
+        .\releaseguard.ps1 $\{\{ inputs.sarif \}\}
